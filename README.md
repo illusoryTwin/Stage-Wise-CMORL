@@ -1,11 +1,11 @@
 # Stage-Wise CMORL
 
-This is an official GitHub Repository for paper ["Stage-Wise Reward Shaping for Acrobatic Robots: A Constrained Multi-Objective Reinforcement Learning Approach"](https://arxiv.org/abs/2409.15755).
+This is a fork from official GitHub Repository for paper ["Stage-Wise Reward Shaping for Acrobatic Robots: A Constrained Multi-Objective Reinforcement Learning Approach"](https://arxiv.org/abs/2409.15755).
 
-## Requirement
+## Requirements
 
-- python==3.7
-- torch==1.12.1
+- python==3.8
+- torch==1.13.1
 - numpy==1.21.5
 - isaacgym (https://developer.nvidia.com/isaac-gym)
 - IsaacGymEnvs (https://github.com/isaac-sim/IsaacGymEnvs)
@@ -14,6 +14,33 @@ This is an official GitHub Repository for paper ["Stage-Wise Reward Shaping for 
 - pandas
 - scipy
 - wandb
+
+## Docker Setup
+
+### Prerequisites
+
+1. **Download IsaacGym**:
+   - Go to https://developer.nvidia.com/isaac-gym
+   - Sign up/login with NVIDIA Developer account
+   - Download `IsaacGym_Preview_4_Package.tar.gz`
+   - Place the downloaded file in the root directory of this repository
+
+2. **Build Docker image**:
+   ```bash
+   docker build -t stage-wise-cmorl .
+   ```
+
+3. **Run Docker container**:
+   ```bash
+   docker run --gpus all -it stage-wise-cmorl
+   ```
+
+    Or recommendengly, 
+    ```
+    docker run -it --rm     --gpus all --env="DISPLAY"  --env="NVIDIA_DRIVER_CAPABILITIES=all"  --env="NVIDIA_VISIBLE_DEVICES=all"    -e DISPLAY=$DISPLAY     -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR     -v /tmp/.X11-unix:/tmp/.X11-unix     --device /dev/dri stage-wise-cmorl
+    ```
+
+**Note**: The `IsaacGym_Preview_4_Package.tar.gz` file is NOT included in this repository due to its size (200MB+) and NVIDIA's licensing requirements. You must download it manually before building the Docker image.
 
 ## Organization
 ```

@@ -20,7 +20,24 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     libgl1-mesa-glx \
     libglib2.0-0 \
+    vim \
     && rm -rf /var/lib/apt/lists/*
+
+# # =========================
+# # Install Vulkan SDK
+# # =========================
+# ENV VULKAN_VERSION=1.3.261.1
+# ENV VULKAN_SDK=/opt/vulkan-sdk
+
+#RUN wget https://sdk.lunarg.com/sdk/download/$VULKAN_VERSION/linux/vulkan-sdk-$VULKAN_VERSION.tar.gz -O /tmp/vulkan-sdk.tar.gz && \
+#    mkdir -p /opt && \
+#    tar -xzf /tmp/vulkan-sdk.tar.gz -C /opt/ && \
+#    mv /opt/$VULKAN_VERSION $VULKAN_SDK && \
+#    rm /tmp/vulkan-sdk.tar.gz
+
+#ENV PATH=$VULKAN_SDK/bin:$PATH
+#ENV LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
+
 
 # Add NVIDIA CUDA repository (network repo version)
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin \
@@ -76,8 +93,19 @@ RUN git clone https://github.com/NVIDIA-Omniverse/IsaacGymEnvs.git /workspace/is
     source /opt/conda/bin/activate py38 && \
     pip install -e /workspace/isaacgymenvs
 
-# Copy current code into container
-COPY . /workspace
+
+# Copy current code into container (overwrite cloned repo with local changes)
+COPY . /workspace/Stage-Wise-CMORL
+
+RUN source /opt/conda/bin/activate py38
+
+# # Copy the wrapper script
+# COPY run_task.sh /workspace/run_task.sh
+# RUN chmod +x /workspace/run_task.sh
+
+
+# # Copy current code into container
+# COPY . /workspace
 
 # # Copy the wrapper script
 # COPY run_task.sh /workspace/run_task.sh
