@@ -1,7 +1,7 @@
 """
 Export script to manually reconstruct the actor newtwork and export it to TorchScript
 Example of usage: 
-python3 export_policy.py --checkpoint_path model_90000000.pt --output_path policy.jit
+python3 export_policy.py --checkpoint_path model_90000000.pt
 """
 import torch
 import torch.nn as nn 
@@ -120,13 +120,16 @@ if __name__ == "__main__":
     # Determine output path
     if args.output_path is None:
         export_dir = os.path.join(os.path.dirname(checkpoint_dir), 'exported')
+        parent_dir = os.path.dirname(checkpoint_dir)
+        export_dir = os.path.join(parent_dir, 'exported')
         os.makedirs(export_dir, exist_ok=True)
         args.output_path = f"{export_dir}/policy_{model_num}.pt"
+        args.output_path = os.path.join(export_dir, f'policy_{model_num}.pt')
+        print(f"Using default export directory: {export_dir}")
     else:
         output_dir = os.path.dirname(args.output_path)
         if output_dir:  # Only create directory if path includes a directory
             os.makedirs(output_dir, exist_ok=True)
-
 
     traced_policy.save(args.output_path)
     print(f"\n✓ Policy exported successfully to: {args.output_path}")
