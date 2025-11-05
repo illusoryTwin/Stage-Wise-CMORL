@@ -1,0 +1,22 @@
+{
+  "obs_dim": 420,
+  "raw_obs_dim": 42,
+  "action_dim": 12,
+  "history_len": 10,
+  "num_actions": 12,
+  "control_dt": 0.02,
+  "default_angles": [
+    0.1,
+    0.8,
+    -1.5,
+    -0.1,
+    0.8,
+    -1.5,
+    0.1,
+    1.0,
+    -1.5,
+    -0.1,
+    1.0,
+    -1.5
+  ]
+}
