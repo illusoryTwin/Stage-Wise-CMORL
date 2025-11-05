@@ -38,7 +38,6 @@ RUN apt-get update && apt-get install -y \
 #ENV PATH=$VULKAN_SDK/bin:$PATH
 #ENV LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
 
-
 # Add NVIDIA CUDA repository (network repo version)
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin \
     && mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600 \
@@ -56,7 +55,7 @@ RUN wget https://github.com/conda-forge/miniforge/releases/download/23.11.0-0/Ma
 
 # Set environment variables
 ENV PATH=/opt/conda/bin:$PATH
-ENV LD_LIBRARY_PATH=/opt/conda/envs/py38/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/opt/conda/envs/py38/lib
 
 # Switch to bash shell
 SHELL ["/bin/bash", "-c"]
@@ -94,22 +93,12 @@ RUN git clone https://github.com/NVIDIA-Omniverse/IsaacGymEnvs.git /workspace/is
     pip install -e /workspace/isaacgymenvs
 
 
-# Copy current code into container (overwrite cloned repo with local changes)
+# Copy current code into container
 COPY . /workspace/Stage-Wise-CMORL
 
-RUN source /opt/conda/bin/activate py38
+# Activate conda environment
+RUN echo "source /opt/conda/bin/activate py38" >> ~/.bashrc
 
-# # Copy the wrapper script
-# COPY run_task.sh /workspace/run_task.sh
-# RUN chmod +x /workspace/run_task.sh
+SHELL ["/bin/bash", "-c", "source ~/.bashrc"]
 
-
-# # Copy current code into container
-# COPY . /workspace
-
-# # Copy the wrapper script
-# COPY run_task.sh /workspace/run_task.sh
-# RUN chmod +x /workspace/run_task.sh
-
-# Optional: Set as entrypoint
-# ENTRYPOINT ["/workspace/run_task.sh"]
+CMD ["/bin/bash"]

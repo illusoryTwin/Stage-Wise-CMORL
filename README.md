@@ -37,7 +37,15 @@ This is a fork from official GitHub Repository for paper ["Stage-Wise Reward Sha
 
     Or recommendengly, 
     ```
-    docker run -it --rm     --gpus all --env="DISPLAY"  --env="NVIDIA_DRIVER_CAPABILITIES=all"  --env="NVIDIA_VISIBLE_DEVICES=all"    -e DISPLAY=$DISPLAY     -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR     -v /tmp/.X11-unix:/tmp/.X11-unix     --device /dev/dri stage-wise-cmorl
+  docker run -it --rm --gpus all \
+    --env="DISPLAY" \
+    --env="NVIDIA_DRIVER_CAPABILITIES=all" \
+    --env="NVIDIA_VISIBLE_DEVICES=all" \
+    -e DISPLAY=$DISPLAY \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --device /dev/dri \
+    stage-wise-cmorl
     ```
 
 **Note**: The `IsaacGym_Preview_4_Package.tar.gz` file is NOT included in this repository due to its size (200MB+) and NVIDIA's licensing requirements. You must download it manually before building the Docker image.
