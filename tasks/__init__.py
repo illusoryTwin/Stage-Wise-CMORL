@@ -1,4 +1,5 @@
 from .go1_backflip import Env as Go1Backflip
+from .go2_backflip import Env as Go2Backflip
 from .go1_sideflip import Env as Go1Sideflip
 from .go1_sideroll import Env as Go1Sideroll
 from .go1_twohand import Env as Go1Twohand
@@ -10,6 +11,7 @@ task_dict = {
     'Go1Sideflip': Go1Sideflip,
     'Go1Sideroll': Go1Sideroll,
     'Go1Twohand': Go1Twohand,
+    'Go2Backflip': Go2Backflip,
     'H1Backflip': H1Backflip,
     'H1Twohand': H1Twohand
 }
