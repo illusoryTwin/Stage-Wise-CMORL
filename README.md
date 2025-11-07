@@ -59,6 +59,7 @@ Stage-Wise-CMORL/
     │     └── student/
     └── assets/
     │     └── go1/
+    │     └── go2/
     │     └── h1/
     └── tasks/
     └── utils/
@@ -77,6 +78,8 @@ Stage-Wise-CMORL/
     - Side-Flip
     - Side-Roll
     - Two-Hand Walk
+- GO2 Robot (Quadruped from Unitree)
+    - Back-Flip
 - H1 Robot (Humanoid from Unitree)
     - Back-Flip
     - Two-Hand Walk
