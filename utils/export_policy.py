@@ -112,7 +112,7 @@ if __name__ == "__main__":
     
     deployment_policy = PolicyForDeployment(actor, obs_mean, obs_std) 
 
-    # Trcae the model
+    # trace the model
     print(f"Tracing model with input shape: {1, args.obs_dim}")
     dummy_obs = torch.randn(1, args.obs_dim, device=device)
     traced_policy = torch.jit.trace(deployment_policy, dummy_obs)
@@ -132,7 +132,7 @@ if __name__ == "__main__":
             os.makedirs(output_dir, exist_ok=True)
 
     traced_policy.save(args.output_path)
-    print(f"\n✓ Policy exported successfully to: {args.output_path}")
+    print(f"\n Policy exported successfully to: {args.output_path}")
      
     # Save config
     raw_obs_dim = args.obs_dim // args.history_len
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     with open(config_path, 'w') as f:
         json.dump(config, f, indent=2)
 
-    print(f"✓ Config saved to: {config_path}")
+    print(f"Config saved to: {config_path}")
     print(f"\nExport info:")
     print(f"  - Input: (batch, {args.obs_dim}) = (batch, {raw_obs_dim} × {args.history_len})")
     print(f"  - Output: (batch, {args.action_dim})")
@@ -162,4 +162,4 @@ if __name__ == "__main__":
     test_obs = torch.randn(1, args.obs_dim, device=device)
     with torch.no_grad():
         test_action = traced_policy(test_obs)
-    print(f"✓ Test passed! Output shape: {test_action.shape}")
+    print(f"Test passed! Output shape: {test_action.shape}")

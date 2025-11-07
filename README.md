@@ -94,3 +94,8 @@ It is required to train a teacher poicy first, and then train a student policy u
 
 - training: `python main_student.py --task_cfg_path tasks/{task_name}.yaml --algo_cfg_path algos/student/{task_name}.yaml --wandb --seed 1`
 - test: `python main_student.py --task_cfg_path tasks/{task_name}.yaml --algo_cfg_path algos/student/{task_name}.yaml --test --render --seed 1 --model_num {saved_model_num}`
+
+
+## Deploy
+
+The `utils/export_policy.py` script loads a trained reinforcement learning policy checkpoint, reconstructs the actor neural network, and exports it as a TorchScript model for deployment without requiring IsaacGym.
