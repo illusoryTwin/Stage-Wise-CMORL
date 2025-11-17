@@ -206,7 +206,7 @@ def train(args, task_cfg, algo_cfg):
                         log_data[f'{log_name}/{cost_name}'] = logger.get_avg(f'{log_name}_{cost_name}', print_len if 'sum' in log_name else print_len2)
                 for log_name in agent_args.logging['task_indep']:
                     log_data[f"metric/{log_name}"] = logger.get_avg(log_name, print_len if log_name in ['eplen', 'fail'] else print_len2)
-                wandb.log(log_data)
+                wandb.log(log_data) # actions_tensor_jit
                 print(log_data)
 
             # send slack message
@@ -286,16 +286,16 @@ def test(args, task_cfg, algo_cfg):
         agent_args.__dict__[key] = algo_cfg[key]
     agent = algo_dict[args.algo_name.lower()](agent_args)
     agent.load(args.model_num)
-    jit = torch.jit.script(agent.actor)
-    jit.save("body_latest.jit")
     
-    # # Load JIT model
-    # jit = torch.jit.load("exported/body_latest.jit", map_location=args.device)
-
-    # jit.eval()
+    # jit = torch.jit.script(agent.actor)
+    # jit.save("body_latest.jit")
 
     with torch.no_grad():
         obs_tensor, states_tensor = vec_env.reset(is_uniform_rollout=False)
+        # Use trace instead of script to avoid 'modules' conflict
+        # dummy_obs = torch.randn(1, args.obs_dim, device=args.device)
+        # jit = torch.jit.trace(agent.actor, dummy_obs)
+        # jit.save("body_latest.jit")
 
     # start rollouts
     for _ in range(100):
@@ -307,8 +307,7 @@ def test(args, task_cfg, algo_cfg):
             with torch.no_grad():
                 # actions_tensor = agent.getAction(obs_tensor, False)
                 actions_tensor = agent.getAction(obs_tensor, True)
-                # actions_tensor_jit = jit(obs_tensor)
-                obs_tensor, states_tensor, rewards_tensor, dones_tensor, infos = vec_env.step(actions_tensor) # actions_tensor_jit
+                obs_tensor, states_tensor, rewards_tensor, dones_tensor, infos = vec_env.step(actions_tensor)
                 reward_sums_tensor += rewards_tensor
                 cost_sums_tensor += infos['costs']
                 if infos['dones'][0]:
