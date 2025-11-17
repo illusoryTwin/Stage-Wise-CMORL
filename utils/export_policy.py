@@ -1,8 +1,6 @@
 """
 Export script to manually reconstruct the actor newtwork and export it to TorchScript
 Example of usage: 
-python3 export_policy.py --checkpoint_path model_90000000.pt
-
 python3 utils/export_policy.py --checkpoint_path exported/model_100000000.pt --normalizer_path exported/100000000.pkl --output_path exported/new_body_latest.jit
 """
 import torch
