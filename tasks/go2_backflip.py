@@ -314,7 +314,7 @@ class Env(VecTask):
         asset_options.disable_gravity = False
         asset_options.collapse_fixed_joints = True
         asset_options.fix_base_link = self.cfg["env"]["urdf_asset"]["fix_base_link"]
-        asset_options.default_dof_drive_mode = gymapi.DOF_MODE_NONE
+        asset_options.default_dof_drive_mode = int(gymapi.DOF_MODE_NONE)
         asset_options.replace_cylinder_with_capsule = True
         asset_options.flip_visual_attachments = self.cfg['env']['urdf_asset']['flip_visual_attachments']
         asset_options.density = 0.001
@@ -755,6 +755,28 @@ class Env(VecTask):
         commands[:, 0] = masks0
         commands[:, 1] = masks1
         commands[:, 2] = masks2
+
+
+        # # Save commands to the log file 
+        # if not hasattr(self, 'commands_log_file'):
+        #     import os 
+        #     import atexit 
+        #     os.makedirs('logs', exist_ok=True)
+        #     self.commands_log_file = open('logs/commands_log.txt', 'w')
+        #     self.commands_log_file.write(f"{'Step':>6},{'Env nums':>6},{'Time(s)':>8},{'cmd_time':>8},{'cmd[0]':>6},{'cmd[1]':>6},{'cmd[2]':>6},{'Stage':>6}\n")
+        #     self.commands_log_file.flush()
+        #     # Register cleanup function to ensure file is closed
+        #     atexit.register(lambda: self.commands_log_file.close() if hasattr(self, 'commands_log_file') and self.commands_log_file else None)
+
+        # # # Write every step to log file (only for first environment)
+        # # if self.num_envs == 1 or True:  # Log during test mode
+        # step = self.progress_buf[0].item()
+        # time_sec = step * self.control_dt
+        # self.commands_log_file.write(f"{step:6d},{self.num_envs}, {time_sec:8.2f},{self.cmd_time_buf[0].item():8.2f},"
+        #                                 f"{commands[0, 0].item():6.0f},{commands[0, 1].item():6.0f},{commands[0, 2].item():6.0f},"
+        #                                 f"{self.stage_buf[0].argmax().item():6d}\n")
+        # if step % 10 == 0:  # Flush every 10 steps to prevent data loss
+        #     self.commands_log_file.flush()
 
         # update observation buffer
         obs = jit_compute_observations(

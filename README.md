@@ -31,6 +31,10 @@ This is a fork from official GitHub Repository for paper ["Stage-Wise Reward Sha
    ```
 
 3. **Run Docker container**:
+   ```
+   xhost +local:docker
+   ```
+
    ```bash
    docker run --gpus all -it stage-wise-cmorl
    ```
