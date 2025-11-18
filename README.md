@@ -107,12 +107,12 @@ It is required to train a teacher poicy first, and then train a student policy u
     # TEACHER
 
     python main_teacher.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/comoppo/go2_backflip.yaml --wandb --seed 1
-    python main_teacher.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/comoppo/go2_backflip.yaml --test --render --seed 1 --model_num 90000000
+    python main_teacher.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/comoppo/go2_backflip.yaml --test --render --seed 1 --model_num 100000000
 
     # STUDENT 
 
     python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --wandb --seed 1
-    python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --test --render --seed 1 --model_num 90000000
+    python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --test --render --seed 1 --model_num 100000000
 ```
 
 ## Deploy
