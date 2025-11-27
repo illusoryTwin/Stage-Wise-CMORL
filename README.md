@@ -52,6 +52,8 @@ This is a fork from official GitHub Repository for paper ["Stage-Wise Reward Sha
         stage-wise-cmorl
     ```
 
+    Or simply run `./run.sh` which handles xhost and docker compose automatically.
+
 **Note**: The `IsaacGym_Preview_4_Package.tar.gz` file is NOT included in this repository due to its size (200MB+) and NVIDIA's licensing requirements. You must download it manually before building the Docker image.
 
 ## Organization
@@ -114,6 +116,22 @@ It is required to train a teacher poicy first, and then train a student policy u
     python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --wandb --seed 1
     python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --test --render --seed 1 --model_num 100000000
 ```
+
+You can train with auto-export (so that the jit file is saved automatically):
+
+```
+    python main_student.py --task_cfg_path tasks/go2_backflip.yaml --algo_cfg_path algos/student/go2_backflip.yaml --wandb --seed 1 --export
+```
+
+Or specify a custom output path:
+
+```
+    python main_student.py ... --export --export_path exported/body_latest.jit
+```
+
+The policy will be exported automatically after training completes.
+
+
 
 ## Deploy
 

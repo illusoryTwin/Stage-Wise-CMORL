@@ -19,6 +19,7 @@ import torch
 import wandb
 import time
 import glob
+import subprocess
 
 def getParser():
     parser = argparse.ArgumentParser()
@@ -38,6 +39,8 @@ def getParser():
     parser.add_argument('--project_name', type=str, default="Stage-Wise-CMORL", help='wandb project name.')
     parser.add_argument('--render',  action='store_true', help='rendering?')
     parser.add_argument('--comment', type=str, default=None, help='wandb comment saved in run name.')
+    parser.add_argument('--export', action='store_true', help='export policy to JIT after training?')
+    parser.add_argument('--export_path', type=str, default='exported/body_latest.jit', help='output path for exported policy.')
     return parser
 
 def train(args, task_cfg, algo_cfg):
@@ -242,6 +245,18 @@ def train(args, task_cfg, algo_cfg):
     # final save
     agent.save(total_step)
     logger.save()
+
+    # export policy to JIT
+    if args.export:
+        checkpoint_path = f"{args.save_dir}/checkpoint/model_{total_step}.pt"
+        normalizer_path = f"{args.save_dir}/obs_scale/{total_step}.pkl"
+        cprint(f'[export] Exporting policy to {args.export_path}...', bold=True, color='cyan')
+        subprocess.run([
+            'python3', 'utils/export_policy.py',
+            '--checkpoint_path', checkpoint_path,
+            '--normalizer_path', normalizer_path,
+            '--output_path', args.export_path
+        ])
 
     # terminate
     vec_env.close()
