@@ -280,7 +280,7 @@ Stephen Brawner (brawner@gmail.com)
     <limit
       lower="-2.7227"
       upper="-0.83776"
-      effort="35.55"
+      effort="45.43"
       velocity="20.07" />
   </joint>
   <link
@@ -539,7 +539,7 @@ Stephen Brawner (brawner@gmail.com)
     <limit
       lower="-2.7227"
       upper="-0.83776"
-      effort="35.55"
+      effort="45.43"
       velocity="20.07" />
   </joint>
   <link
@@ -798,7 +798,7 @@ Stephen Brawner (brawner@gmail.com)
     <limit
       lower="-2.7227"
       upper="-0.83776"
-      effort="35.55"
+      effort="45.43"
       velocity="20.07" />
   </joint>
   <link
@@ -1057,7 +1057,7 @@ Stephen Brawner (brawner@gmail.com)
     <limit
       lower="-2.7227"
       upper="-0.83776"
-      effort="35.55"
+      effort="45.43"
       velocity="20.07" />
   </joint>
   <link
