@@ -2,7 +2,10 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by
 Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter
+     Original source: 
+     https://git.sberrobots.ru/legged-robotics-team/reinforcement-learning/legged_gym/-/tree/master/resources/robots/go2/urdf?ref_type=heads -->
+     
 <robot
   name="go2_description">
   <link

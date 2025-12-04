@@ -1,15 +1,20 @@
 *.ipynb
-*.pkl
-*.pt
 *.pyc
-*.png
-*.sh
 .env
 args.txt
 
 __pycache__
 wandb
 model
-results
 .vscode
 IsaacGym_Preview_4_Package.tar.gz
+
+# Training artifacts (large files)
+results/
+# Exported policies
+exported/*.jit
+exported/*.pt
+exported/*.pkl
+exported/backup/
+*.pt
+*.pkl

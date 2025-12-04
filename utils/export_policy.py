@@ -1,7 +1,7 @@
 """
 Export script to manually reconstruct the actor newtwork and export it to TorchScript
 Example of usage: 
-python3 utils/export_policy.py --checkpoint_path results/go2backflip_student/seed_1/checkpoint/model_100000000.pt --normalizer_path results/go2backflip_student/seed_1/obs_scale/100000000.pkl --output_path exported/new_body_latest.jit
+python3 utils/export_policy.py --checkpoint_path results/go2backflip_student/seed_1/checkpoint/model_100000000.pt --normalizer_path results/go2backflip_student/seed_1/obs_scale/100000000.pkl --output_path exported/body_latest.jit
 """
 import torch
 import torch.nn as nn 

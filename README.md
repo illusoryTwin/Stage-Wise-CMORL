@@ -1,6 +1,6 @@
 # Stage-Wise CMORL
 
-This is a fork from official GitHub Repository for paper ["Stage-Wise Reward Shaping for Acrobatic Robots: A Constrained Multi-Objective Reinforcement Learning Approach"](https://arxiv.org/abs/2409.15755).
+This repository adapts the [Stage-Wise CMORL](https://github.com/rllab-snu/Stage-Wise-CMORL) framework for Unitree Go2 quadruped backflip training and deployment. The corresponding reference paper: ["Stage-Wise Reward Shaping for Acrobatic Robots: A Constrained Multi-Objective Reinforcement Learning Approach"](https://arxiv.org/abs/2409.15755).
 
 ## Requirements
 

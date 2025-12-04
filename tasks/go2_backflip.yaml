@@ -93,15 +93,17 @@ env:
             20.0, 20.0, 20.0, 
             20.0, 20.0, 20.0, 
             20.0, 20.0, 20.0]
+        # 95% from original limits
+        # relevant limits in urdf are taken from the xml reference
         joint_torque_upper: [
-            20.0, 20.0, 32.0, 
-            20.0, 20.0, 32.0, 
-            20.0, 20.0, 32.0, 
-            20.0, 20.0, 32.0]
+            22.5, 22.5, 43.0, 
+            22.5, 22.5, 43.0, 
+            22.5, 22.5, 43.0, 
+            22.5, 22.5, 43.0]
         ########################
         
     randomize:
-        is_randomized               : false
+        is_randomized               : true
         rand_period_motor_strength_s: 5.0
         rand_period_gravity_s       : 5.0
         rand_range_body_mass        : [-1.0, 3.0]
